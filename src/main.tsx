@@ -1,5 +1,5 @@
 import { render } from 'preact'
-import Widget from './Widget'
+import { Widget } from './Widget'
 import css from './index.css?inline'
 
 import.meta.env.DEV && import('./dev.css')
