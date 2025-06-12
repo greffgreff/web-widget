@@ -1,11 +1,10 @@
 import.meta.env.DEV && import('./dev.css')
 
 export function hotreload(createWidget: () => void) {
-	if (!import.meta.hot) {
-		return
+	if (import.meta.hot) {
+		import.meta.hot.accept(() => {
+			document.getElementById('web-widget')?.remove()
+			createWidget()
+		})
 	}
-	import.meta.hot.accept(() => {
-		document.getElementById('web-widget')?.remove()
-		createWidget()
-	})
 }
