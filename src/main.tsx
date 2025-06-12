@@ -1,17 +1,22 @@
 import { render } from 'preact'
 import Widget from './Widget'
-import './dev.css'
+import css from './index.css?inline'
 
-const wrapper = document.createElement('div')
-document.body.appendChild(wrapper)
+import.meta.env.DEV && import('./dev.css')
 
-const shadow = wrapper.attachShadow({ mode: 'open' })
+document.addEventListener('DOMContentLoaded', () => {
+	const wrapper = document.createElement('div')
+	wrapper.id = 'web-widget'
+	document.body.appendChild(wrapper)
 
-const style = document.createElement('style')
-style.textContent = `@import "/src/index.css"`
-shadow.appendChild(style)
+	const shadow = wrapper.attachShadow({ mode: 'open' })
 
-const root = document.createElement('div')
-shadow.appendChild(root)
+	const style = document.createElement('style')
+	style.textContent = css
+	shadow.appendChild(style)
 
-render(<Widget />, root)
+	const root = document.createElement('div')
+	shadow.appendChild(root)
+
+	render(<Widget />, root)
+})
