@@ -1,10 +1,9 @@
 import { render } from 'preact'
+import { hotreload } from './dev/hook'
 import { Widget } from './Widget'
 import css from './index.css?inline'
 
-import.meta.env.DEV && import('./dev.css')
-
-document.addEventListener('DOMContentLoaded', () => {
+function createWidget() {
 	const wrapper = document.createElement('div')
 	wrapper.id = 'web-widget'
 	document.body.appendChild(wrapper)
@@ -19,4 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	shadow.appendChild(root)
 
 	render(<Widget />, root)
-})
+}
+document.addEventListener('DOMContentLoaded', createWidget)
+
+hotreload(createWidget)
